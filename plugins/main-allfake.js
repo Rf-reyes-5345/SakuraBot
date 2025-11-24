@@ -18,11 +18,10 @@ global.año = d.toLocaleDateString('es', {year: 'numeric'})
 global.tiempo = d.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true})
 
 var canal = 'https://whatsapp.com/channel/0029VbBBXTr5fM5flFaxsO06'  
-var comunidad = 'https://chat.whatsapp.com/BXxWuamOOE4K9eKC623FIO'
 var git = 'https://github.com/leoxito'
 var github = 'https://github.com/leoxito/Itsuki-NakanoV2'
 var correo = 'xzzysultra@gmail.com'
-global.redes = [canal, comunidad, git, github, correo].getRandom()
+global.redes = [canal, git, github, correo].getRandom()
 
 global.nombre = m.pushName || 'User-MD'
 global.packsticker = ``
@@ -41,6 +40,8 @@ global.iconos = [
   'https://cdn.russellxz.click/f46d62d3.jpg',
   'https://cdn.russellxz.click/36caddb4.jpg'
 ]
+
+// Seleccionar imagen random al azar
 global.icono = global.iconos[Math.floor(Math.random() * global.iconos.length)]
 
 global.fkontak = { key: { participants:"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
