@@ -26,7 +26,7 @@ global.redes = [canal, comunidad, git, github, correo].getRandom()
 global.nombre = m.pushName || 'User-MD'
 global.packsticker = ``
 
-// Todas las imágenes en orden
+// SOLO CAMBIÉ LAS IMÁGENES - Todo lo demás igual
 global.iconos = [
   'https://cdn.russellxz.click/a015cecd.jpg',
   'https://cdn.russellxz.click/d112a400.jpg',
