@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-const thumbnailUrl = 'https://qu.ax/Asbfq.jpg'
+const thumbnailUrl = 'https://cdn.russellxz.click/b317cef7.jpg'
 
 const handler = async (m, { conn, args, command, usedPrefix }) => {
   const input = args.join(' ').trim()
