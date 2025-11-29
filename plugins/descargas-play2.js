@@ -48,7 +48,7 @@ let handler = async (m, { conn, text, usedPrefix }) => {
     const video = searchResults.videos[0]    
     const { url, title, fuente } = await ytdl(video.url)    
 
-    const caption = `> *ⓘ Y O U T U B E - P L A Y V3*
+    const caption = `> *ⓘ Y O U T U B E - P L A Y V2*
 
 > *🏷 ${title}*
 > *⏱️ ${video.timestamp}*
