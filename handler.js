@@ -18,7 +18,7 @@ const localPart = v => (v + '').split('@')[0].split(':')[0].split('/')[0].split(
 const normalizeCore = v => toNum(localPart(v))
 const prettyNum = v => { const n = normalizeCore(v); if (!n) return ''; return `+${n}` }
 
-// Función normalizeJid mejorada
+// Función normalizeJid mejorada con compatibilidad simple.js
 const normalizeJid = v => {
     if (!v) return ''
     if (typeof v === 'number') v = String(v)
@@ -29,17 +29,58 @@ const normalizeJid = v => {
         const n = toNum(v.split('@')[0])
         return n ? n + '@s.whatsapp.net' : v
     }
+    if (v.includes('@lid')) {
+        // Compatibilidad con LIDs de simple.js
+        return v
+    }
     const n = toNum(v)
     return n ? n + '@s.whatsapp.net' : v
 }
 
 const cleanJid = jid => jid?.split(':')[0] || ''
 
-function decodeJidCompat(jid = '') { if (!jid) return jid; if (/:[0-9A-Fa-f]+@/.test(jid)) { const [user, server] = jid.split('@'); return user.split(':')[0] + '@' + server } return jid }
+function decodeJidCompat(jid = '') { 
+    if (!jid) return jid; 
+    if (/:[0-9A-Fa-f]+@/.test(jid)) { 
+        const [user, server] = jid.split('@'); 
+        return user.split(':')[0] + '@' + server 
+    } 
+    return jid 
+}
 
+// Inicialización de la base de datos mejorada
 if (!global.db) global.db = { data: { users: {}, chats: {}, settings: {}, stats: {} } }
 if (!global.db.data) global.db.data = { users: {}, chats: {}, settings: {}, stats: {} }
 if (typeof global.loadDatabase !== 'function') global.loadDatabase = async () => {}
+
+// Sistema de caché mejorado para LIDs
+if (!global.lidResolver) {
+    global.lidResolver = {
+        cache: new Map(),
+        getUserInfo: function(lidKey) {
+            return this.cache.get(lidKey) || null;
+        },
+        setUserInfo: function(lidKey, userInfo) {
+            this.cache.set(lidKey, { ...userInfo, timestamp: Date.now() });
+        },
+        resolveLid: async function(lidJid, groupChatId, maxRetries = 2) {
+            const lidKey = lidJid.split('@')[0];
+            const cached = this.getUserInfo(lidKey);
+            if (cached && !cached.notFound && !cached.error) {
+                return cached.jid;
+            }
+            
+            try {
+                // Implementación básica de resolución LID
+                // En una implementación real, aquí iría la lógica para resolver LIDs
+                return lidJid; // Por ahora devolvemos el LID original
+            } catch (error) {
+                this.setUserInfo(lidKey, { error: error.message, notFound: true });
+                return lidJid;
+            }
+        }
+    };
+}
 
 function pickOwners() {
   const arr = Array.isArray(global.owner) ? global.owner : []
@@ -69,7 +110,7 @@ function isPremiumJid(jid) {
   return !!u?.premium
 }
 
-// Función parseUserTargets - AGREGADA
+// Función parseUserTargets mejorada con compatibilidad simple.js
 function parseUserTargets(input, options = {}) {
     try {
         if (!input || input.trim() === '') return [];
@@ -96,7 +137,7 @@ function parseUserTargets(input, options = {}) {
                 targets.push(...m._mentionedJidResolved.map(jid => normalizeJid(jid)));
             }
 
-            // Procesar texto para extraer números/JIDs
+            // Procesar texto para extraer números/JIDs con compatibilidad LID
             const textTargets = input.split(/[,;\s\n]+/).map(item => item.trim()).filter(item => item);
 
             for (let item of textTargets) {
@@ -104,7 +145,8 @@ function parseUserTargets(input, options = {}) {
                 if (item.startsWith('@')) {
                     const num = item.substring(1);
                     if (num) {
-                        const jid = `${num}@s.whatsapp.net`;
+                        // Usar la lógica de parseMention de simple.js
+                        const jid = this.parseMention?.(`@${num}`)?.[0] || `${num}@s.whatsapp.net`;
                         targets.push(jid);
                     }
                     continue;
@@ -120,7 +162,7 @@ function parseUserTargets(input, options = {}) {
                     continue;
                 }
 
-                // Si ya parece un JID
+                // Si ya parece un JID (incluyendo LIDs)
                 if (item.includes('@')) {
                     targets.push(normalizeJid(item));
                     continue;
@@ -150,14 +192,14 @@ function parseUserTargets(input, options = {}) {
     }
 }
 
-// SISTEMA DE PRIMARY BOT - AGREGADO
+// SISTEMA DE PRIMARY BOT - MEJORADO
 async function handlePrimaryBotSystem(m, conn) {
     if (!m.isGroup) return false;
-    
+
     const chat = global.db.data.chats[m.chat];
     if (!chat?.primaryBot) return false;
 
-    const universalWords = ['resetbot', 'resetprimario', 'botreset', 'setprimary', 'primary', 'unprimary'];
+    const universalWords = ['resetbot', 'resetprimario', 'botreset', 'setprimary', 'primary', 'unprimary', 'primarybot'];
     const firstWord = m.text ? m.text.trim().split(' ')[0].toLowerCase().replace(/^[./#]/, '') : '';
 
     // Permitir comandos universales de administración de primary bot
@@ -167,7 +209,23 @@ async function handlePrimaryBotSystem(m, conn) {
 
     // Si este bot no es el primary bot, no procesar el comando
     if (conn?.user?.jid !== chat.primaryBot) {
-        return true; // Indicar que se debe ignorar el comando
+        // Verificar si el primary bot está conectado y en el grupo
+        try {
+            const groupMetadata = await conn.groupMetadata(m.chat).catch(() => null);
+            const primaryBotInGroup = groupMetadata?.participants?.some(p => p.id === chat.primaryBot);
+
+            if (primaryBotInGroup) {
+                return true; // Indicar que se debe ignorar el comando
+            } else {
+                // Si el primary bot no está en el grupo, limpiar la configuración
+                chat.primaryBot = null;
+                return false;
+            }
+        } catch (error) {
+            console.error('Error verificando primary bot:', error);
+            chat.primaryBot = null; // Limpiar en caso de error
+            return false;
+        }
     }
 
     return false; // Continuar con el procesamiento normal
@@ -178,6 +236,26 @@ export async function handler(chatUpdate) {
   if (!chatUpdate) return
   this.__waCache = this.__waCache || new Map()
   this._groupCache = this._groupCache || {}
+  
+  // Inicialización de métodos de simple.js si no existen
+  if (!this.parseMention) {
+      this.parseMention = function(text = "") {
+          try {
+            const esNumeroValido = (numero) => {
+              const len = numero.length;
+              if (len < 8 || len > 13) return false; 
+              if (len > 10 && numero.startsWith("9")) return false;
+              const codigosValidos = ["1","7","20","27","30","31","32","33","34","36","39","40","41","43","44","45","46","47","48","49","51","52","53","54","55","56","57","58","60","61","62","63","64","65","66","81","82","84","86","90","91","92","93","94","95","98","211","212","213","216","218","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","248","249","250","251","252","253","254","255","256","257","258","260","261","262","263","264","265","266","267","268","269","290","291","297","298","299","350","351","352","353","354","355","356","357","358","359","370","371","372","373","374","375","376","377","378","379","380","381","382","383","385","386","387","389","420","421","423","500","501","502","503","504","505","506","507","508","509","590","591","592","593","594","595","596","597","598","599","670","672","673","674","675","676","677","678","679","680","681","682","683","685","686","687","688","689","690","691","692","850","852","853","855","856","880","886","960","961","962","963","964","965","966","967","968","970","971","972","973","974","975","976","977","978","979","992","993","994","995","996","998"]; 
+              return codigosValidos.some((codigo) => numero.startsWith(codigo));
+            };
+            return (text.match(/@(\d{5,20})/g) || []).map((m) => m.substring(1)).map((numero) => esNumeroValido(numero) ? `${numero}@s.whatsapp.net` : `${numero}@lid`);
+          } catch (error) {
+            console.error("Error:", error);
+            return [];
+          }
+      };
+  }
+
   try {
     const botIdKey = this.user?.jid || (this.user?.id ? this.decodeJid(this.user.id) : 'bot')
     global.db.data.settings[botIdKey] = global.db.data.settings[botIdKey] || {}
@@ -357,32 +435,7 @@ export async function handler(chatUpdate) {
     const isAllowed = allowedBots.includes(this.user.jid)
     if (isSubbs && !isAllowed) return
 
-    // SISTEMA PRIMARY BOT MEJORADO
-    if (m.isGroup) {
-        const chat = global.db.data.chats[m.chat];
-        if (chat?.primaryBot && chat.primaryBot !== this.user.jid) {
-            const universalWords = ['resetbot', 'resetprimario', 'botreset', 'setprimary', 'primary', 'unprimary', 'primarybot'];
-            const firstWord = m.text ? m.text.trim().split(' ')[0].toLowerCase().replace(/^[./#]/, '') : '';
-
-            if (!universalWords.includes(firstWord)) {
-                // Verificar si el primary bot está conectado y en el grupo
-                try {
-                    const groupMetadata = await this.groupMetadata(m.chat).catch(() => null);
-                    const primaryBotInGroup = groupMetadata?.participants?.some(p => p.id === chat.primaryBot);
-                    
-                    if (primaryBotInGroup) {
-                        return; // Ignorar comando si el primary bot está en el grupo
-                    } else {
-                        // Si el primary bot no está en el grupo, limpiar la configuración
-                        chat.primaryBot = null;
-                    }
-                } catch (error) {
-                    console.error('Error verificando primary bot:', error);
-                    chat.primaryBot = null; // Limpiar en caso de error
-                }
-            }
-        }
-    }
+    // SISTEMA PRIMARY BOT MEJORADO - ya manejado en handlePrimaryBotSystem
 
     if (opts['nyimak']) return
     if (!m.fromMe && opts['self']) return
@@ -408,39 +461,73 @@ export async function handler(chatUpdate) {
       return { id: rawId, wid, widNum: normalizeCore(wid), admin: participant.admin ? 'admin' : null, isAdmin: !!participant.admin }
     })
 
+    // Resolución de menciones LIDs mejorada
     const resolveMentionLids = async () => {
-      const rawMentionList = Array.isArray(m.message?.extendedTextMessage?.contextInfo?.mentionedJid) ? m.message.extendedTextMessage.contextInfo.mentionedJid : (Array.isArray(m.mentionedJid) ? m.mentionedJid : [])
+      const rawMentionList = Array.isArray(m.message?.extendedTextMessage?.contextInfo?.mentionedJid) ? 
+          m.message.extendedTextMessage.contextInfo.mentionedJid : 
+          (Array.isArray(m.mentionedJid) ? m.mentionedJid : [])
+      
       const needs = rawMentionList.some(j => /@lid$/i.test(j))
       if (!needs) {
         m._mentionedJidResolved = rawMentionList.map(j => (typeof this.decodeJid === 'function' ? this.decodeJid(j) : decodeJidCompat(j)))
         return
       }
+      
       this._lidResolveCache = this._lidResolveCache || new Map()
+      
       async function resolveLid(lidJid, ctx) {
         if (!lidJid) return lidJid
         if (!/@lid$/i.test(lidJid)) return (typeof ctx.decodeJid === 'function' ? ctx.decodeJid(lidJid) : decodeJidCompat(lidJid))
+        
         const num = normalizeCore(lidJid)
         if (ctx._lidResolveCache.has(num)) return ctx._lidResolveCache.get(num)
+        
+        // Usar el sistema de resolución LID de simple.js si está disponible
+        if (typeof String.prototype.resolveLidToRealJid === 'function') {
+            try {
+                const resolved = await String.prototype.resolveLidToRealJid.call(
+                    lidJid, 
+                    m.chat, 
+                    ctx, 
+                    2, 
+                    1000
+                );
+                if (resolved && !resolved.endsWith('@lid')) {
+                    ctx._lidResolveCache.set(num, resolved);
+                    return resolved;
+                }
+            } catch (error) {
+                console.log(`Error en resolveLid para ${lidJid}:`, error.message);
+            }
+        }
+        
         const quick = participantsNormalized.find(p => p.widNum === num)
         if (quick && /@s\.whatsapp\.net$/.test(quick.wid)) {
           ctx._lidResolveCache.set(num, quick.wid); return quick.wid
         }
+        
         for (const p of participantsNormalized) {
           const real = p.wid || p.id
           if (!real) continue
           try {
             const waInfo = await ctx.onWhatsApp(real)
             const lidField = waInfo?.[0]?.lid
-            if (lidField && normalizeCore(lidField) === num) { ctx._lidResolveCache.set(num, real); return real }
+            if (lidField && normalizeCore(lidField) === num) { 
+                ctx._lidResolveCache.set(num, real); 
+                return real 
+            }
           } catch {}
         }
+        
         const fallback = num ? `${num}@s.whatsapp.net` : lidJid
         ctx._lidResolveCache.set(num, fallback)
         return fallback
       }
+      
       const resolved = []
       for (const jid of rawMentionList) resolved.push(await resolveLid(jid, this))
       m._mentionedJidResolved = resolved
+      
       if (m.message) {
         for (const k of Object.keys(m.message)) {
           const msgObj = m.message[k]
@@ -450,6 +537,7 @@ export async function handler(chatUpdate) {
         }
       }
     }
+    
     await resolveMentionLids()
 
     const nameOf = async (jid) => {
@@ -486,7 +574,7 @@ export async function handler(chatUpdate) {
       return num
     }
 
-    // Función getUserInfo - AGREGADA
+    // Función getUserInfo - MEJORADA con compatibilidad simple.js
     const getUserInfo = async (jid, options = {}) => {
         try {
             const normalizedJid = normalizeJid(jid);
@@ -496,6 +584,14 @@ export async function handler(chatUpdate) {
             const name = await nameOf(normalizedJid);
             const roles = await roleFor(normalizedJid);
             const badges = await badgeFor(normalizedJid);
+
+            // Información adicional del sistema simple.js
+            const additionalInfo = {
+                isBaileys: m.isBaileys || false,
+                mediaMessage: m.mediaMessage || null,
+                mediaType: m.mediaType || null,
+                quoted: m.quoted || null
+            };
 
             return {
                 jid: normalizedJid,
@@ -510,7 +606,8 @@ export async function handler(chatUpdate) {
                 bank: user?.bank || 0,
                 ...roles,
                 badges,
-                displayTag: await displayTag(normalizedJid)
+                displayTag: await displayTag(normalizedJid),
+                ...additionalInfo
             };
         } catch (error) {
             console.error('Error en getUserInfo:', error);
@@ -531,6 +628,11 @@ export async function handler(chatUpdate) {
     m.isSuperAdmin = isRAdmin
     m.isBotAdmin = isBotAdmin
     m.adminRole = isRAdmin ? 'superadmin' : (isAdmin ? 'admin' : null)
+
+    // Propiedades adicionales de simple.js
+    m.isBaileys = m.isBaileys || false;
+    m.mediaMessage = m.mediaMessage || null;
+    m.mediaType = m.mediaType || null;
 
     if (!m.name) {
       const guess = await nameOf(m.sender)
@@ -603,7 +705,23 @@ export async function handler(chatUpdate) {
 
       const rolesCtx = await roleFor(m.sender)
       if (typeof plugin.before === 'function') {
-        if (await plugin.before.call(this, m, { match, conn: this, participants, groupMetadata, user: participantUser || {}, bot: botParticipant || {}, isROwner: rolesCtx.isROwner, isOwner: rolesCtx.isOwner, isRAdmin, isAdmin, isBotAdmin, isPrems: rolesCtx.isPrems, chatUpdate, __dirname: ___dirname, __filename })) continue
+        if (await plugin.before.call(this, m, { 
+            match, 
+            conn: this, 
+            participants, 
+            groupMetadata, 
+            user: participantUser || {}, 
+            bot: botParticipant || {}, 
+            isROwner: rolesCtx.isROwner, 
+            isOwner: rolesCtx.isOwner, 
+            isRAdmin, 
+            isAdmin, 
+            isBotAdmin, 
+            isPrems: rolesCtx.isPrems, 
+            chatUpdate, 
+            __dirname: ___dirname, 
+            __filename 
+        })) continue
       }
       if (typeof plugin !== 'function') continue
       if ((usedPrefix = (match[0] || '')[0])) {
@@ -640,7 +758,42 @@ export async function handler(chatUpdate) {
         if (xp > 200) m.reply('chirrido -_-')
         else m.exp += xp
         if (plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) { this.reply(m.chat, `Se agotaron tus *Dolares 💲*`, m); continue }
-        let extra = { match, usedPrefix, noPrefix, _args, args, command, text, conn: this, participants, groupMetadata, user: participantUser || {}, bot: botParticipant || {}, isROwner: rolesCtx.isROwner, isOwner: rolesCtx.isOwner, isRAdmin, isAdmin, isBotAdmin, isPrems: rolesCtx.isPrems, chatUpdate, __dirname: ___dirname, __filename, displayTag: m.displayTag, badges: m.badges, role: m.role, parseUserTargets, getUserInfo }
+        
+        // Objeto extra mejorado con todas las funcionalidades de simple.js
+        let extra = { 
+            match, 
+            usedPrefix, 
+            noPrefix, 
+            _args, 
+            args, 
+            command, 
+            text, 
+            conn: this, 
+            participants, 
+            groupMetadata, 
+            user: participantUser || {}, 
+            bot: botParticipant || {}, 
+            isROwner: rolesCtx.isROwner, 
+            isOwner: rolesCtx.isOwner, 
+            isRAdmin, 
+            isAdmin, 
+            isBotAdmin, 
+            isPrems: rolesCtx.isPrems, 
+            chatUpdate, 
+            __dirname: ___dirname, 
+            __filename, 
+            displayTag: m.displayTag, 
+            badges: m.badges, 
+            role: m.role, 
+            parseUserTargets: (input, opts) => parseUserTargets.call(this, input, { ...opts, m }),
+            getUserInfo,
+            // Métodos de simple.js disponibles
+            serializeM: () => smsg(this, m),
+            cMod: this.cMod?.bind(this),
+            copyNForward: this.copyNForward?.bind(this),
+            downloadM: this.downloadM?.bind(this)
+        }
+        
         let didPresence = false
         try {
           const botIdKey = this.user?.jid || (this.user?.id ? this.decodeJid(this.user.id) : 'bot')
