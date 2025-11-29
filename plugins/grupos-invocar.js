@@ -27,10 +27,11 @@ const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, co
 
   // Crear array de menciones
   const mentions = [];
-  
+
   for (const mem of participants) {
-    const userId = mem.id.split('@')[0];
-    teks += `┃ ⓘ \`@${userId}\`\n`;
+    // Obtener el nombre del usuario o usar el número si no tiene nombre
+    const userName = mem.name || mem.notify || `@${mem.id.split('@')[0]}`;
+    teks += `┃ ⓘ *${userName}*\n`;
     mentions.push(mem.id); // Agregar el ID completo para la mención
   }
 
