@@ -74,7 +74,7 @@ async function makeFkontak() {
     const thumb2 = Buffer.from(await res.arrayBuffer())
     return {
       key: { participants: '0@s.whatsapp.net', remoteJid: 'status@broadcast', fromMe: false, id: 'Halo' },
-      message: { locationMessage: { name: '𝗖𝗿𝗲𝗮 𝗧𝘂 𝗦𝘁𝗶𝗰𝗸𝗲𝗿 🖼️', jpegThumbnail: thumb2 } },
+      message: { locationMessage: { name: '🖼️ 𝗦𝘁𝗶𝗰𝗸𝗲𝗿 𝗖𝗿𝗲𝗮𝗱𝗼 𝗖𝗼𝗻 𝗘𝘅𝗶𝘁𝗼 ✅', jpegThumbnail: thumb2 } },
       participant: '0@s.whatsapp.net'
     }
   } catch {
