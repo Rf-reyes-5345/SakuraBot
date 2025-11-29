@@ -41,16 +41,19 @@ let handler = async (m, { conn }) => {
         try {
             const characters = await loadCharacters()
             
-            // PATRÓN CORREGIDO - Busca exactamente "ID: *id*"
-            const characterIdMatch = m.quoted.text.match(/ID: \*(.+?)\*/)
-
+            // BUSCAR EN CAPTION O TEXT - CORREGIDO
+            const quotedText = m.quoted.caption || m.quoted.text || ''
+            
+            // PATRÓN MEJORADO - Busca "ID: id" (con o sin *)
+            const characterIdMatch = quotedText.match(/ID:\s*([^*\n]+)/)
+            
             if (!characterIdMatch) {
-                await conn.reply(m.chat, '> ⓘ \`No se pudo encontrar el ID del personaje\`', m)
+                await conn.reply(m.chat, '> ⓘ \`No se pudo encontrar el ID del personaje\`\n> ⓘ \`Asegúrate de citar el mensaje del personaje\`', m)
                 await m.react('❌')
                 return
             }
 
-            const characterId = characterIdMatch[1]
+            const characterId = characterIdMatch[1].trim()
             const character = characters.find(c => c.id === characterId)
 
             if (!character) {
