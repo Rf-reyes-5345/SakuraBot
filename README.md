@@ -1,4 +1,4 @@
-# `❄️ Itsuki Nakano - IA New Update V3` ✨
+# `❄️ Itsuki Nakano - IA V3` ✨
 
 <div align="center">
 
