@@ -15,8 +15,6 @@ import config from './config.js'
 // import handlerModule from './handler.js'
 import { loadDatabase, saveDatabase, DB_PATH } from './lib/db.js'
 import { watchFile } from 'fs'
-
-// ✅ 
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -503,3 +501,4 @@ return phoneUtil.isValidNumber(parsed)
 return false
 }
 }
+} // <-- ESTA ES LA LLAVE QUE FALTABA
