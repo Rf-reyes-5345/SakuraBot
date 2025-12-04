@@ -395,15 +395,16 @@ export async function handler(chatUpdate) {
 
         const isOwners = [this.user.jid, ...global.owner.map(v => Array.isArray(v) ? v[0] : v).filter(Boolean).map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net")].includes(m.sender)
 
-        if (opts["queque"] && m.text && !(isPrems)) {
-            const queque = this.msgqueque, time = 1000 * 5
-            const previousID = queque[queque.length - 1]
-            queque.push(m.id || m.key.id)
-            setInterval(async function () {
-                if (queque.indexOf(previousID) === -1) clearInterval(this)
-                await delay(time)
-            }, time)
-        }
+       if (opts['queque'] && m.text && !(isMods || isPrems)) {
+let queque = this.msgqueque,
+time = 1000 * 5
+const previousID = queque[queque.length - 1]
+queque.push(m.id || m.key.id)
+setInterval(async function () {
+if (queque.indexOf(previousID) === -1) clearInterval(this)
+await delay(time)
+}, time)
+}
 
         if (m.isBaileys) return
 
