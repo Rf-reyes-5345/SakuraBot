@@ -16,7 +16,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
   }
 
   try {
-    await conn.sendMessage(m.chat, { react: { text: '🔍', key: m.key } })
+    await conn.sendMessage(m.chat, { react: { text: '🕛p', key: m.key } })
 
     let searchA = await search(text)
     if (!searchA.length) {
@@ -31,7 +31,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     let data5 = await download(searchA[0].id)
 
     // Primero enviar solo la imagen/portada del APK
-    let txtPortada = `> 🎴 𝐏𝐎𝐑𝐓𝐀𝐃𝐀 𝐃𝐄𝐋 𝐀𝐏𝐊
+    let txtPortada = `> 🎴 𝐈𝐍𝐅𝐎 𝐃𝐄𝐋 𝐀𝐏𝐊
 
 > 📱 *Nombre:* ${data5.name}
 > 📦 *Paquete:* ${data5.package}
@@ -44,27 +44,9 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     // Enviar primero la imagen de portada
     await conn.sendFile(m.chat, data5.icon, 'portada-apk.jpg', txtPortada, m)
-    
-    // Esperar un momento antes de enviar la info adicional
+
+    // Esperar un momento antes de enviar el APK
     await new Promise(resolve => setTimeout(resolve, 1000))
-
-    // Enviar información adicional del APK
-    let txtInfo = `> ⓘ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂𝐈Ó𝐍 𝐃𝐄𝐓𝐀𝐋𝐋𝐀𝐃𝐀
-
-> 📱 *Aplicación:* ${data5.name}
-> 📦 *ID del paquete:* ${data5.package}
-> 🏷️ *Versión:* ${data5.version || 'N/A'}
-> 📅 *Actualización:* ${data5.lastup}
-> 💾 *Tamaño del APK:* ${data5.size}
-> ⭐ *Puntuación:* ${data5.rating || 'N/A'}
-> 👥 *Descargas:* ${data5.downloads || 'N/A'}
-    
-> 🔍 *Descripción:*
-${data5.description ? (data5.description.substring(0, 300) + (data5.description.length > 300 ? '...' : '')) : 'Sin descripción disponible'}
-
-> 📥 *Espera mientras se prepara la descarga del APK...* 🕑`
-
-    await conn.reply(m.chat, txtInfo, m)
 
     if (data5.size.includes('GB') || parseFloat(data5.size.replace(' MB', '')) > 999) {
       await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
