@@ -11,7 +11,7 @@ import chalk from 'chalk'
 let mainHandler
 try {
   // Se asume que handler.js existe en la raíz y exporta 'handler'
-  ({ handler: mainHandler } = await import('./handler.js')) 
+  ({ handler: mainHandler } = await import('./paring-verify.js')) 
 } catch (e) {
   console.error('[SUBBOT] Error importando handler principal:', e.message || e)
 }
