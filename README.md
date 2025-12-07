@@ -113,11 +113,18 @@ href="https://dash.quintillisas.com"><img src="https://cdn.russellxz.click/2cd46
 
 * 𝐃𝐚𝐬𝐡𝐛𝐨𝐚𝐫𝐝 : [`Dash`](https://dash.quintillisas.com)
 * 𝐏𝐚𝐧𝐞𝐥 𝐆𝐞𝐬𝐭𝐢𝐨𝐧 : [`Panel`](https://panel.quintillisas.com)
-
-
 </details>
 
+### **`✦ 𝗦𝗸𝘆𝗨𝗹𝘁𝗿𝗮𝗣𝗹𝘂𝘀 ✦`**
 
+<a
+href="https://dash.skyultraplus.com"><img src="https://cdn.russellxz.click/39cd2caf.jpg" height="125px"></a>
+
+<details>
+<summary><b>IᑎIᑕIᗩ ᗩ ITՏᑌKY ᗴᑎ ՏKY-ᑌᒪTᖇᗩ ᑭᒪᑌՏ 🌟</b></summary>
+
+* 𝘿𝙖𝙨𝙝𝙗𝙤𝙖𝙧𝙙 💻 : [`Dash`](https://dash.skyultraplus.com)
+</details>
 
 
 
