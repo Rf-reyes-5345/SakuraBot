@@ -67,6 +67,8 @@ async function loadPlugins() {
   const entries = fs.readdirSync(PLUGIN_PATH)
   for (const entry of entries) {
     const entryPath = path.join(PLUGIN_PATH, entry)
+    const fileName = path.basename(entryPath) // Obtenemos el nombre del archivo/carpeta
+
     if (fs.statSync(entryPath).isDirectory()) {
       const files = fs.readdirSync(entryPath).filter(f => f.endsWith('.js'))
       for (const file of files) {
@@ -74,6 +76,11 @@ async function loadPlugins() {
         await importAndIndexPlugin(full)
       }
     } else if (entry.endsWith('.js')) {
+      // ⚠️ CORRECCIÓN DUPLICIDAD: Ignorar paring-whatsapp.js porque se carga por handler.js
+      if (fileName === 'paring-whatsapp.js') {
+        console.log(chalk.yellow(`[Plugins] Ignorando ${fileName} (Es un módulo conector, se carga en handler.js).`));
+        continue; 
+      }
       await importAndIndexPlugin(entryPath)
     }
   }
@@ -120,7 +127,7 @@ try {
 } catch {}
 await loadPlugins()
 
-// --- 🎯 CAMBIO CLAVE: Importación de handler y conector ---
+// --- 🎯 CORRECCIÓN CLAVE: Importación de handler y conector ---
 let handler
 try { 
   const mod = await import('./handler.js');
@@ -131,13 +138,14 @@ try {
 
 let startSubBot
 try { 
-  // 🟢 Importamos startSubBot desde el archivo conector correcto
-  const modSub = await import('./pairing-whatsapp.js'); 
+  // 🟢 CORRECCIÓN DE RUTA Y ORTOGRAFÍA: Apuntando a './plugins/paring-whatsapp.js'
+  const modSub = await import('./plugins/paring-whatsapp.js'); 
   startSubBot = modSub.startSubBot; 
 } catch (e) { 
-  console.error('[SubBot Connector] Error importando startSubBot. Asegúrate de que pairing-whatsapp.js exista:', e.message); 
+  // 💡 Muestra el error de importación con la ruta corregida
+  console.error('[SubBot Connector] Error importando startSubBot. Asegúrate de que ./plugins/paring-whatsapp.js exista:', e.message); 
 }
-// --- FIN CAMBIO CLAVE ---
+// --- FIN CORRECCIÓN CLAVE ---
 
 try {
   const { say } = cfonts
@@ -522,7 +530,10 @@ global.reload = async (_ev, filename) => {
         }
       } catch {}
     }
-    await importAndIndexPlugin(filePath)
+    // ⚠️ Corregido: Si el archivo es el conector, no lo recarga como plugin
+    if (filename !== 'paring-whatsapp.js') {
+        await importAndIndexPlugin(filePath)
+    }
     console.log(chalk.green(`🍃 Recargado plugin '${filename}'`))
   } catch (e) {
     console.error('[ReloadPlugin]', e.message || e)
