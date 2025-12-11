@@ -65,8 +65,17 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     else if (['play4', 'mp4'].includes(command)) {
       await conn.sendMessage(m.chat, { react: { text: '🎥', key: m.key } })
+      
+      console.log('Buscando video para:', url)
       const video = await getVid(url)
-      if (!video?.url) throw '> ⓘ ERROR\n\n❌ No se pudo obtener el video'
+      console.log('Resultado de getVid:', video)
+      
+      if (!video?.url) {
+        console.log('No se obtuvo URL del video')
+        throw '> ⓘ ERROR\n\n❌ No se pudo obtener el video\n\n💡 Verifica que el video no esté restringido o prueba con otro'
+      }
+
+      console.log('URL del video obtenida:', video.url)
 
       await conn.sendMessage(
         m.chat,
@@ -115,12 +124,25 @@ async function getVid(url) {
       api: 'Yupra',
       endpoint: `https://api.yupra.my.id/api/downloader/ytmp4?url=${encodeURIComponent(url)}`,
       extractor: (res) => {
+        console.log('Respuesta de Yupra API:', JSON.stringify(res, null, 2))
+        
         if (res?.success && res?.data?.download_url) {
+          console.log('URL encontrada:', res.data.download_url)
           return {
             url: res.data.download_url,
             quality: res.data.format || 'Desconocida'
           }
         }
+        
+        if (res?.statusCode === 200 && res?.data?.download_url) {
+          console.log('URL encontrada (formato alternativo):', res.data.download_url)
+          return {
+            url: res.data.download_url,
+            quality: res.data.format || 'Desconocida'
+          }
+        }
+        
+        console.log('No se encontró download_url en la respuesta')
         return null
       }
     }
@@ -130,37 +152,75 @@ async function getVid(url) {
 
 async function fetchFromApis(apis) {
   for (const { api, endpoint, extractor } of apis) {
+    console.log(`Probando API ${api}: ${endpoint}`)
+    
     try {
       const controller = new AbortController()
-      const timeout = setTimeout(() => controller.abort(), 10000)
+      const timeout = setTimeout(() => controller.abort(), 15000)
+      
       const response = await fetch(endpoint, { 
         signal: controller.signal,
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Accept-Language': 'es-ES,es;q=0.9',
+          'Referer': 'https://api.yupra.my.id/'
         }
       })
       
+      clearTimeout(timeout)
+      
+      console.log(`Status ${api}: ${response.status}`)
+      console.log(`Headers ${api}:`, response.headers)
+      
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`)
+        console.log(`Error HTTP ${api}: ${response.status} ${response.statusText}`)
+        continue
       }
       
-      const res = await response.json()
-      clearTimeout(timeout)
+      const contentType = response.headers.get('content-type')
+      console.log(`Content-Type ${api}: ${contentType}`)
+      
+      let res
+      if (contentType && contentType.includes('application/json')) {
+        res = await response.json()
+      } else {
+        const text = await response.text()
+        console.log(`Respuesta texto ${api}:`, text.substring(0, 200))
+        
+        try {
+          res = JSON.parse(text)
+        } catch {
+          console.log(`No es JSON válido ${api}`)
+          continue
+        }
+      }
+      
+      console.log(`Respuesta JSON ${api}:`, res)
       
       const result = extractor(res)
       if (result) {
+        console.log(`Éxito ${api}:`, result)
         return {
           url: result.url,
           quality: result.quality,
           api
         }
       }
+      
+      console.log(`Extractor no encontró datos ${api}`)
+      
     } catch (err) {
       console.log(`Error en API ${api}:`, err.message)
+      if (err.name === 'AbortError') {
+        console.log(`Timeout en API ${api}`)
+      }
     }
-    await new Promise(resolve => setTimeout(resolve, 500))
+    
+    await new Promise(resolve => setTimeout(resolve, 1000))
   }
+  
+  console.log('Todas las APIs fallaron')
   return null
 }
 
