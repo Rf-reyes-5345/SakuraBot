@@ -17,8 +17,8 @@ let handler = async (m, { conn, participants }) => {
 
     // URL de las imágenes para bienvenida y despedida
     // ¡IMPORTANTE! Debes cambiar estas URLs por las tuyas.
-    const welcomeImageUrl = 'https://i.imgur.com/eQ1M3VM.gif'; // URL para bienvenida
-    const goodbyeImageUrl = 'https://i.imgur.com/VnLxMlU.gif';  // URL para despedida
+    const welcomeImageUrl = 'https://cdn.russellxz.click/6ae2181d.jpg'; // URL para bienvenida
+    const goodbyeImageUrl = 'https://cdn.russellxz.click/9f98f272.jpg';  // URL para despedida
 
     // Usamos un 'switch' para manejar las diferentes acciones (agregar o quitar)
     switch (m.action) {
