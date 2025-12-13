@@ -57,7 +57,7 @@ watchFile(CONFIG_PATH, async () => {
 
 global.plugins = {}
 global.commandIndex = {}
-async function loadPlugins() {
+async function loadPluginsFunction() {
   global.plugins = {}
   global.commandIndex = {}
   const PLUGIN_PATH = path.join(__dirname, 'plugins')
@@ -116,9 +116,9 @@ async function importAndIndexPlugin(fullPath) {
 
 async function loadSubBots() {
   const SUB_BOT_FOLDER = './Sessions/Subs'
-  
+
   if (!fs.existsSync(SUB_BOT_FOLDER)) return
-  
+
   const botIds = fs.readdirSync(SUB_BOT_FOLDER)
   for (const userId of botIds) {
     const sessionPath = path.join(SUB_BOT_FOLDER, userId)
@@ -143,7 +143,7 @@ async function startSubBotSession(userId, sessionPath) {
   try {
     const { state, saveCreds } = await useMultiFileAuthState(sessionPath)
     const { version } = await fetchLatestBaileysVersion()
-    
+
     const sock = makeWASocket({
       version,
       logger: pino({ level: 'silent' }),
@@ -152,15 +152,15 @@ async function startSubBotSession(userId, sessionPath) {
       syncFullHistory: false,
       browser: Browsers.macOS('Chrome')
     })
-    
+
     sock.userId = userId
     sock.isSubBot = true
-    
+
     sock.ev.on('creds.update', saveCreds)
-    
+
     sock.ev.on('connection.update', async (update) => {
       const { connection, lastDisconnect } = update
-      
+
       if (connection === 'open') {
         console.log(chalk.green(`[ 🤖 ]  Sub-bot conectado: ${userId}`))
         sock.uptime = Date.now()
@@ -169,14 +169,14 @@ async function startSubBotSession(userId, sessionPath) {
         }
         reconnecting.delete(userId)
       }
-      
+
       if (connection === 'close') {
         const reason = lastDisconnect?.error?.output?.statusCode || 0
         console.log(chalk.yellow(`[ 🤖 ]  Sub-bot desconectado: ${userId} (código: ${reason})`))
-        
+
         const index = global.conns.findIndex(c => c.userId === userId)
         if (index !== -1) global.conns.splice(index, 1)
-        
+
         if (!reconnecting.has(userId)) {
           reconnecting.add(userId)
           setTimeout(() => {
@@ -188,7 +188,7 @@ async function startSubBotSession(userId, sessionPath) {
         }
       }
     })
-    
+
     sock.ev.on('messages.upsert', async (chatUpdate) => {
       try {
         const msgs = Array.isArray(chatUpdate?.messages) ? chatUpdate.messages : []
@@ -210,27 +210,39 @@ async function startSubBotSession(userId, sessionPath) {
         console.error(`[SubBotHandler] ${userId}:`, e.message)
       }
     })
-    
+
   } catch (error) {
     throw error
   }
 }
 
-try { await loadDatabase() } catch (e) { console.log('[DB] Error cargando database:', e.message) }
+// Cargar base de datos
+try { 
+  await loadDatabase() 
+} catch (e) { 
+  console.log('[DB] Error cargando database:', e.message) 
+}
+
 try {
   const dbInfo = `\n╭─────────────────────────────◉\n│ ${chalk.red.bgBlueBright.bold('        📦 BASE DE DATOS        ')}\n│ 「 🗃 」${chalk.yellow('Archivo: ')}${chalk.white(DB_PATH)}\n╰─────────────────────────────◉\n`
   console.log(dbInfo)
 } catch {}
-await loadPlugins()
 
+// Cargar plugins - CORRECCIÓN AQUÍ
+await loadPluginsFunction()
+
+// Cargar sub-bots en segundo plano
 (async () => {
   await loadSubBots()
 })()
 
 let handler
-try { ({ handler } = await import('./handler.js')) 
+try { 
+  ({ handler } = await import('./handler.js')) 
   global.handler = handler
-} catch (e) { console.error('[Handler] Error importando handler:', e.message) }
+} catch (e) { 
+  console.error('[Handler] Error importando handler:', e.message) 
+}
 
 try {
   const { say } = cfonts
@@ -242,7 +254,10 @@ try {
   try { serialize() } catch {}
   const packageJsonPath = path.join(__dirname, 'package.json')
   let packageJsonObj = {}
-  try { const rawPkg = await fs.promises.readFile(packageJsonPath, 'utf8'); packageJsonObj = JSON.parse(rawPkg) } catch {}
+  try { 
+    const rawPkg = await fs.promises.readFile(packageJsonPath, 'utf8'); 
+    packageJsonObj = JSON.parse(rawPkg) 
+  } catch {}
   const ramInGB = os.totalmem() / (1024 * 1024 * 1024)
   const freeRamInGB = os.freemem() / (1024 * 1024 * 1024)
   const currentTime = new Date().toLocaleString()
@@ -264,6 +279,13 @@ async function chooseMethod(authDir) {
   if (process.argv.includes('--code')) return 'code'
   if (process.env.LOGIN_MODE === 'qr') return 'qr'
   if (process.env.LOGIN_MODE === 'code') return 'code'
+  
+  // Si no hay TTY (entorno sin terminal), usar QR por defecto
+  if (!process.stdin.isTTY) {
+    console.log(chalk.yellow('[INFO] Entorno sin TTY, usando método QR por defecto'))
+    return 'qr'
+  }
+  
   let ans
   do {
     console.clear()
