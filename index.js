@@ -229,7 +229,7 @@ try {
 } catch {}
 
 // Cargar plugins - CORRECCIÓN AQUÍ
-await loadPluginsFunction()
+await loadPlugins()
 
 // Cargar sub-bots en segundo plano
 (async () => {
