@@ -1,5 +1,12 @@
 import ytSearch from 'yt-search'
 import fetch from 'node-fetch'
+import { exec } from 'child_process'
+import { promisify } from 'util'
+import { writeFileSync, unlinkSync, readFileSync } from 'fs'
+import { tmpdir } from 'os'
+import { join } from 'path'
+
+const execAsync = promisify(exec)
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) return conn.reply(m.chat, `> ⓘ \`Uso:\` *${usedPrefix + command} nombre del video*`, m)
@@ -24,23 +31,64 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     if (command === 'play11') {
       try {
-        const response = await fetch(`https://api.ytbvideodl.vercel.app/?url=${video.url}&type=video`)
-        const data = await response.json()
+        const result = await fetch(`https://fgsi.dpdns.org/api/downloader/youtube/v2?apikey=fgsiapi-335898e9-6d&url=${video.url}&type=mp4`).then(r => r.json())
+        if (!result?.data?.url) throw new Error('API sin resultado válido')
+
+        const tempInput = join(tmpdir(), `${Date.now()}_input.mp4`)
+        const tempOutput = join(tmpdir(), `${Date.now()}_output.mp4`)
+
+        const videoResponse = await fetch(result.data.url)
+        const videoBuffer = await videoResponse.buffer()
+        writeFileSync(tempInput, videoBuffer)
+
+        await execAsync(`ffmpeg -i "${tempInput}" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 128k -movflags +faststart "${tempOutput}"`)
+
+        const convertedBuffer = readFileSync(tempOutput)
         
-        if (data?.url) {
-          await conn.sendMessage(m.chat, {
-            video: { url: data.url },
-            caption: `> ⓘ \`Video:\` *${video.title}*`,
-            fileName: `${video.title}.mp4`,
-            mimetype: 'video/mp4'
-          }, { quoted: m })
-          await m.react('✅')
-        } else {
-          throw new Error('Sin URL de video')
-        }
+        await conn.sendMessage(m.chat, {
+          video: convertedBuffer,
+          caption: `> ⓘ \`Video:\` *${video.title}*`,
+          fileName: `${video.title}.mp4`,
+          mimetype: 'video/mp4'
+        }, { quoted: m })
+
+        unlinkSync(tempInput)
+        unlinkSync(tempOutput)
+
+        await m.react('✅')
       } catch (err) {
         await m.react('❌')
-        conn.reply(m.chat, '> ⓘ \`Error al descargar el video\`', m)
+        try {
+          const altResult = await fetch(`https://api.nekolabs.fun/api/ytdl?url=${video.url}`).then(r => r.json())
+          if (altResult?.videoUrl) {
+            const tempInput = join(tmpdir(), `${Date.now()}_input2.mp4`)
+            const tempOutput = join(tmpdir(), `${Date.now()}_output2.mp4`)
+
+            const videoResponse = await fetch(altResult.videoUrl)
+            const videoBuffer = await videoResponse.buffer()
+            writeFileSync(tempInput, videoBuffer)
+
+            await execAsync(`ffmpeg -i "${tempInput}" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 128k -movflags +faststart "${tempOutput}"`)
+
+            const convertedBuffer = readFileSync(tempOutput)
+            
+            await conn.sendMessage(m.chat, {
+              video: convertedBuffer,
+              caption: `> ⓘ \`Video:\` *${video.title}*`,
+              fileName: `${video.title}.mp4`,
+              mimetype: 'video/mp4'
+            }, { quoted: m })
+
+            unlinkSync(tempInput)
+            unlinkSync(tempOutput)
+            
+            await m.react('✅')
+          } else {
+            throw new Error('APIs fallaron')
+          }
+        } catch (e) {
+          conn.reply(m.chat, '> ⓘ \`Error al procesar el video. Verifica que ffmpeg esté instalado.\`', m)
+        }
       }
     } else {
       try {
@@ -56,8 +104,10 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
           audioUrl = fallback.data.url
         }
 
+        const audioBuffer = await fetch(audioUrl).then(res => res.buffer())
+
         await conn.sendMessage(m.chat, {
-          audio: { url: audioUrl },
+          audio: audioBuffer,
           mimetype: 'audio/mpeg',
           fileName: `${video.title}.mp3`,
           ptt: false
