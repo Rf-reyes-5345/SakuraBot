@@ -1,46 +1,11 @@
 import ws from 'ws'
-import pkg from '@whiskeysockets/baileys'
-const { DisconnectReason, generateWAMessageFromContent, proto, prepareWAMessageMedia } = pkg
 import fs from "fs/promises"
 import path from 'path'
 
-// Quoted especial con mini-thumbnail
-async function makeFkontak() {
-  try {
-    const { default: fetch } = await import('node-fetch')
-    const res = await fetch('https://cdn.russellxz.click/a1d42213.jpg')
-    const thumb2 = Buffer.from(await res.arrayBuffer())
-    return {
-      key: { 
-        participants: '0@s.whatsapp.net', 
-        remoteJid: 'status@broadcast', 
-        fromMe: false, 
-        id: 'Halo' 
-      },
-      message: { 
-        locationMessage: { 
-          name: '🌷 𝗟𝗶𝘀𝘁𝗮 𝗱𝗲 𝗦𝘂𝗯𝗯𝗼𝘁𝘀 𝗔𝗰𝘁𝗶𝘃𝗼𝘀', 
-          jpegThumbnail: thumb2 
-        } 
-      },
-      participant: '0@s.whatsapp.net'
-    }
-  } catch {
-    return undefined
-  }
-}
-
 let handler = async(m, { usedPrefix, conn, text }) => {
-  // Emoji de reacción inicial
-  try { await conn.sendMessage(m.chat, { react: { text: '🕑', key: m.key } }) } catch {}
-  
 const limit = 20
-// --- VERSIÓN ORIGINAL ---
-// Leemos desde global.subbots
-const users = [...new Set([...global.subbots.filter((conn) => conn.user && conn.ws?.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
 
-// Emoji cuando se están procesando los bots
-try { await conn.sendMessage(m.chat, { react: { text: '🤖', key: m.key } }) } catch {}
+const users = [...new Set([...global.subbots.filter((conn) => conn.user && conn.ws?.socket && conn.ws.socket.readyState !== ws.CLOSED).map((conn) => conn)])];
 
 function dhms(ms) {
   var segundos = Math.floor(ms / 1000);
@@ -69,7 +34,6 @@ function dhms(ms) {
   return resultado;
 }
 
-// Función para contar sesiones guardadas
 async function info(path) {
     try {
         const items = await fs.readdir(path);
@@ -82,7 +46,6 @@ async function info(path) {
 
 const jadi = 'Sessions/SubBot'
 
-// Generar lista de bots con la decoración solicitada
 let botList = ''
 users.forEach((v, index) => {
     const jid = v.user.jid.replace(/[^0-9]/g, '')
@@ -100,15 +63,51 @@ users.forEach((v, index) => {
 const totalUsers = users.length
 const sesionesGuardadas = await info(jadi)
 
+const basePath = path.join(dirname, '../../Sessions')
+const folders = {
+  Subs: 'Subs',
+}
+const getBotsFromFolder = (folderName) => {
+  const folderPath = path.join(basePath, folderName)
+  if (!fs.existsSync(folderPath)) return []
+  return fs
+    .readdirSync(folderPath)
+    .filter((dir) => {
+      const credsPath = path.join(folderPath, dir, 'creds.json')
+      return fs.existsSync(credsPath)
+    })
+    .map((id) => id.replace(/\D/g, '')) // Normaliza a solo números
+}
+const categorizedBots = { Owner: [], Sub: [] }
+
+const formatBot = (number, label) => {
+  const jid = number + '@s.whatsapp.net'
+  if (!groupParticipants.includes(jid)) return null
+  mentionedJid.push(jid)
+  const data = global.db.data.settings[jid]
+  const name = data?.namebot2 || 'Bot'
+  const handle = `@${number}`
+  return `- [${label} *${name}*] › ${handle}`
+}
+
+const totalCounts = {
+  Owner: global.db.data.settings[mainBotJid] ? 1 : 0,
+  Sub: subs.length,
+}
+
+const groupParticipants = groupMetadata?.participants?.map((p) => p.phoneNumber || p.jid || p.lid || p.id) || []
+const isMainBotInGroup = groupParticipants.includes(mainBotJid)
+
+const data = global.db.data.settings[jid]
+const name = data?.namebot2 || 'Bot'
+
 let cap = `# 📚 *Subbots activos : ${totalUsers}/100*\n\n`
 cap += `💾 *Sesiones guardadas:* ${sesionesGuardadas}\n`
 cap += `🟢 *Sesiones activas:* ${totalUsers}\n`
 
-// ESPACIO ELIMINADO - si no hay bots, no mostrar nada más
 if (totalUsers > 0) {
     if (totalUsers > limit) {
         cap += `\n> *[🧃] El número de subbots activos supera el límite de ${limit} por lo que no se mostrará la lista con los tags.*\n\n`
-        // Aún así mostrar algunos (los primeros 5)
         const limitedUsers = users.slice(0, 5)
         limitedUsers.forEach((v, index) => {
             const jid = v.user.jid.replace(/[^0-9]/g, '')
@@ -127,79 +126,14 @@ if (totalUsers > 0) {
         cap += `\n${botList}`
     }
 } else {
-    // Cuando no hay bots, agregar un mensaje amigable sin espacio extra
     cap += `\n\n📭 *No hay subbots activos en este momento.*\n😊 *¡Sé el primero en crear uno!*`
 }
 
-// Obtener menciones para los tags
 const mentions = users.map(v => v.user.jid)
-
-// Obtener el quoted especial
-const fkontak = await makeFkontak()
-
-// Emoji de éxito cuando se va a enviar el mensaje
-try { await conn.sendMessage(m.chat, { react: { text: '✅️', key: m.key } }) } catch {}
-
-// Crear botón del canal oficial
-const nativeButtons = [
-  {
-    name: 'cta_url',
-    buttonParamsJson: JSON.stringify({ 
-      display_text: '𝗖𝗔𝗡𝗔𝗟 𝗢𝗙𝗜𝗖𝗜𝗔𝗟 🌸', 
-      url: 'https://whatsapp.com/channel/0029VbBvZH5LNSa4ovSSbQ2N' 
-    })
-  }
-]
-
-try {
-  // Usar la imagen del fkontak como imagen principal
-  const imageUrl = "https://cdn.russellxz.click/a1d42213.jpg"
-  const media = await prepareWAMessageMedia({ image: { url: imageUrl } }, { upload: conn.waUploadToServer })
-
-  const header = proto.Message.InteractiveMessage.Header.fromObject({
-    hasMediaAttachment: true,
-    imageMessage: media.imageMessage
-  })
-
-  // Crear mensaje interactivo con botón
-  const interactiveMessage = proto.Message.InteractiveMessage.fromObject({
-    body: proto.Message.InteractiveMessage.Body.fromObject({ text: cap }),
-    header,
-    nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-      buttons: nativeButtons
-    })
-  })
-
-  const msg = generateWAMessageFromContent(m.chat, { interactiveMessage }, { 
-    userJid: conn.user.jid, 
-    quoted: fkontak // Usar el quoted especial
-  })
-  await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
-
-} catch (e) {
-  console.error('❌ Error al enviar mensaje interactivo:', e)
-  // Fallback: enviar mensaje normal si falla el interactivo
-  await conn.sendMessage(m.chat, {
-    text: cap, 
-    mentions: mentions,
-    contextInfo: {
-      mentionedJid: mentions,
-      externalAdReply: {
-        title: "🤖 LISTA DE SUBBOTS ACTIVOS",
-        mediaType: 1,
-        previewType: 0,
-        renderLargerThumbnail: true,
-        thumbnail: await (await fetch("https://cdn.russellxz.click/a1d42213.jpg")).buffer(),
-        sourceUrl: ''
-      }
-    }
-  }, { quoted: fkontak || m })
-}
 }
 
 handler.help = ['botlist']
 handler.tags = ['serbot']
-handler.command = ['bots', 'listabots', 'subbots'] 
-// handler.rowner = true
+handler.command = ['bots', 'listabots', 'subbots']
 
 export default handler
