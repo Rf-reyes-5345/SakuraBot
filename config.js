@@ -13,27 +13,27 @@ global.__dirname = (url) => dirname(fileURLToPath(url));
 
 //aquí los retirados👑🥀
 global.retirado = [
-['526675819507','sayori',true]
+['59175409126','Reyes',true]
 ];
 
 /*habrán comandos especiales para los retirados algo q los identifique | nota ustedes pondrán los coamndos y q solo funcione para los retirados*/
 
 // Configuraciones principales
-global.roowner = ['526675819507', '18094374392']
+global.roowner = ['59175409126', '59175409126']
 global.owner = [
-   ['526675819507', 'YO SOY YO', true],
    ['59175409126', 'By Reyes-ofc', true],
-   ['5216671548329', 'Legna', true],
-   ['50496228919', '𝐒𝐨𝐩𝐨𝐫𝐭𝐞 𝐱 𝐒𝐭𝐚𝐟𝐟 𝐈𝐭𝐬𝐮𝐤𝐢 👨🏻‍💻👑', true],
+   ['526675819507', 'Sayori', true],
+   ['59175704278', 'Legna', true],
+   ['59172245844', '𝐒𝐨𝐩𝐨𝐫𝐭𝐞 𝐱 𝐒𝐭𝐚𝐟𝐟 𝐈𝐭𝐬𝐮𝐤𝐢 👨🏻‍💻👑', true],
    ['595972314588', '۪〬.࠭⤿ 👑 ⋅ 𝘿𝙖𝙫𝙞𝙙   𝙭𝙯𝙨𝙮', true],
    ['573187418668', '𝙇𝙚𝙤   𝙭𝙯𝙨𝙮  🦇🩸', true],
    ['5216641784469', 'BrayanOFC', true],
    ['573114910696', 'Arlette Xz', true],
    ]
 
-global.mods = ['573187418668', '595972314588', '51921826291']
-global.suittag = ['573187418668', '595972314588', '51921826291']
-global.prems = ['573187418668', '595972314588', '51921826291', '5216671548329']
+global.mods = ['59175409126', '526675819507', '59175704278']
+global.suittag = ['59175409126', '526675819507', '59175704278']
+global.prems = ['59175409126', '526675819507', '59175704278', '59172245844']
 
 // Información del bot 
 global.libreria = 'Baileys'
@@ -53,13 +53,13 @@ global.botNumber = '18482389332'
 // Números y settings globales para varios códigos
 global.packname = '𝗟𝗮 𝗠𝗲𝗷𝗼𝗿 𝗕𝗼𝘁 𝗗𝗲 𝗪𝗵𝗮𝘁𝘀𝗮𝗽𝗽 🫰🏻🤖'
 global.botname = '🧋 𝐈 𝐓 𝐒 𝐔 𝐊 𝐈 - 𝐍 𝐄 𝐖 ❄️'
-global.wm = '© 𝐋𝐞𝐨'
+global.wm = 'By Reyes-ofc'
 global.wm3 = '⫹⫺ 𝙈𝙪𝙡𝙩𝙞-𝘿𝙚𝙫𝙞𝙘𝙚 💻'
-global.author = '👑 ᗰᗩᗪᗴ ᗷY ᒪᗴO 🧃'
-global.dev = '© 𝙾𝚆𝙽𝙴𝚁-𝙻𝙴𝙾 𝙳𝙴𝚅 👑'
-global.textbot = 'Itsuki-Nakano|IAV3 Leo'
-global.etiqueta = '@Leo Xzsy'
-global.gt = '© 𝐂𝐫𝐞𝐚𝐝𝐨 𝐏𝐨𝐫 𝐋𝐞𝐨𝐃𝐞𝐯 𝐈𝐭𝐬𝐮𝐤𝐢-𝐂𝐡𝐚𝐧 𝐓𝐡𝐞 𝐁𝐞𝐬𝐭 𝐁𝐨𝐭𝐬 𝐎𝐟 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 🤖👑'
+global.author = 'By Reyes-ofc'
+global.dev = '© 𝙾𝚆𝙽𝙴𝚁-By Reyes-ofc'
+global.textbot = 'Itsuki-Nakano|By Reyes-ofc'
+global.etiqueta = 'By Reyes-ofc'
+global.gt = '© 𝐂𝐫𝐞𝐚𝐝𝐨 𝐏𝐨𝐫 R 𝐈𝐭𝐬𝐮𝐤𝐢-𝐂𝐡𝐚𝐧 𝐓𝐡𝐞 𝐁𝐞𝐬𝐭 𝐁𝐨𝐭𝐬 𝐎𝐟 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 🤖👑'
 global.me = '🌨️ 𝙸𝚃𝚂𝚄𝙺𝙸 𝙽𝙰𝙺𝙰𝙽𝙾 𝙼𝙴𝚆 𝚄𝙿𝙳𝙰𝚃𝙴 ☃️'
 global.listo = '*Aqui tiene*'
 global.moneda = 'Yenes'
