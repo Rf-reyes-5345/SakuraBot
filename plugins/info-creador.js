@@ -4,7 +4,7 @@ let handler = async (m, { conn }) => {
   try {
     await conn.sendMessage(m.chat, { react: { text: '👑', key: m.key } })
 
-    const menuText = `> *@Hola Soy La Creador De Itsuki Nakano La Bot Que Estas Usando*\n\n> sᴇʟᴇᴄɪᴏɴᴀ ᴜɴ ᴍᴇᴛᴏᴅᴏ ᴘᴀʀᴀ ᴄᴏᴍᴜɴɪᴄᴀʀᴛᴇ ᴄᴏɴᴍɪɢᴏ 🧃:`
+    const menuText = `> *@Hola Soy La Creadora De Itsuki Nakano La Bot Que Estas Usando*\n\n> sᴇʟᴇᴄɪᴏɴᴀ ᴜɴ ᴍᴇᴛᴏᴅᴏ ᴘᴀʀᴀ ᴄᴏᴍᴜɴɪᴄᴀʀᴛᴇ ᴄᴏɴᴍɪɢᴏ 🧃:`
 
     const imageUrl = 'https://cdn.russellxz.click/892b3d23.jpg'
 
@@ -12,22 +12,22 @@ let handler = async (m, { conn }) => {
       {
         name: 'cta_url',
         buttonParamsJson: JSON.stringify({ 
-          display_text: '𝙄𝙣𝙨𝙩𝙖𝙜𝙧𝙖𝙢 📸', 
-          url: 'https://www.instagram.com/naayz01s' 
-        })
-      },
-      {
-        name: 'cta_url',
-        buttonParamsJson: JSON.stringify({ 
-          display_text: '𝙊𝙬𝙣𝙚𝙧 👑', 
+          display_text: '👑 𝗖𝗿𝗲𝗮𝗱𝗼𝗿 ⚡️', 
           url: 'https://wa.me/59175409126' 
         })
       },
       {
         name: 'cta_url',
         buttonParamsJson: JSON.stringify({ 
-          display_text: '𝘿𝙤𝙣𝙖𝙘𝙞𝙤𝙣𝙘𝙞𝙩𝙖 ❤️‍🩹', 
-          url: 'https://paypal.me/Erenxs01' 
+          display_text: '𝗢𝘄𝗻𝗲𝗿 📖', 
+          url: 'https://wa.me/526675819507' 
+        })
+      },
+      {
+        name: 'cta_url',
+        buttonParamsJson: JSON.stringify({ 
+          display_text: '𝗗𝗲𝘀𝗮𝗿𝗿𝗼𝗹𝗹𝗮𝗱𝗼𝗿 🍧', 
+          url: 'https://wa.me/59175704278' 
         })
       }
     ]
