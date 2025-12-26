@@ -21,7 +21,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
 
  ִ \`I N F O - B O T\` ! ୧ ֹ 
    
-> ੭੭﹙❐﹚ \`bot :\` *ItsukiV3*
+> ੭੭﹙❐﹚ \`bot :\` *𝙎𝙖𝙠𝙪𝙧𝙖𝘽𝙤𝙩-𝙈𝘿 🌸*
 > ੭੭﹙❐﹚ \`Ping :\` *${speed} ms*
 > ੭੭﹙❐﹚ \`Uptime :\` *${await getUptime()}*
 > ੭੭﹙❐﹚ \`RAM :\` *${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)}* MB
@@ -32,7 +32,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
 `
 
     const categories = {
-  'NAKANO-INFO': ['main', 'info'],
+  'SAKURA-INFO': ['main', 'info'],
   'INTELIGENCIA': ['bots', 'ia'],
   'JUEGOS': ['game', 'gacha'],
   'ECONOMÍA': ['economy', 'rpgnk'],
@@ -114,7 +114,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
   } catch (e) {
     console.error('❌ Error en el menú:', e)
     await conn.sendMessage(m.chat, {
-      text: `🍙 *ITSUNI MENÚ BÁSICO*\n\n• ${_p}menu - Menú principal\n• ${_p}ping - Estado del bot\n• ${_p}prefijos - Ver prefijos\n\n⚠️ *Error:* ${e.message}`
+      text: `🍙 *SAKURA MENÚ BÁSICO*\n\n• ${_p}menu - Menú principal\n• ${_p}ping - Estado del bot\n• ${_p}prefijos - Ver prefijos\n\n⚠️ *Error:* ${e.message}`
     }, { quoted: m })
   }
 }
@@ -145,6 +145,6 @@ async function getUptime() {
 
 handler.help = ['menu','help']
 handler.tags = ['main']
-handler.command = ['itsuki', 'menu', 'help']
+handler.command = ['Sakura', 'menu', 'help']
 
 export default handler
