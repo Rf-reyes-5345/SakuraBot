@@ -10,7 +10,7 @@ try {
     
     conn.sendPresenceUpdate('composing', m.chat)
     let waitingMsg = await conn.sendMessage(m.chat, { 
-        text: `🔎 *Itsuki Nakano-IA buscando waifus...* ✨\n╰ 📚 Analizando base de datos de chicas kawaii...` 
+        text: `🔎 *SakuraBot esta buscando waifus...* ✨\n╰ 📚 Analizando base de datos de chicas kawaii...` 
     }, { quoted: m })
 
     let res = await fetch('https://api.waifu.pics/sfw/waifu')
@@ -22,7 +22,7 @@ try {
     // Enviar la imagen
     await conn.sendFile(m.chat, json.url, 'waifu.jpg', 
         `🌸 *¡WAIFU ENCONTRADA!* 🌸\n` +
-        `🧧 *Itsuki Nakano-IA te presenta:*\n` +
+        `🧧 *Sakura Bot te presenta:*\n` +
         `✨ Una waifu virtual perfecta para ti\n` +
         `📚 ¿No es absolutamente kawaii? (◕‿◕✿)\n` +
         `🍜 ~ Disfruta de tu compañera virtual ~`, 
@@ -42,7 +42,7 @@ try {
 } catch (error) {
     console.error(error)
     await m.react('❌')
-    await conn.reply(m.chat, `*Itsuki Nakano-IA dice:*\n╰ ❌ Ocurrió un error al buscar waifus...\n╰ 📚 Por favor, intenta de nuevo más tarde.`, m, ctxErr)
+    await conn.reply(m.chat, `*Sakura Bot te dice:*\n╰ ❌ Ocurrió un error al buscar waifus...\n╰ 📚 Por favor, intenta de nuevo más tarde.`, m, ctxErr)
 }
 }
 
