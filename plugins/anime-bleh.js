@@ -14,7 +14,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let str = m.mentionedJid.length > 0 || m.quoted 
         ? `💙 \`${name2}\` le hizo una cara traviesa a \`${name || who}\` en el concierto virtual 😜` 
-        : `💙 \`${name2}\` está siendo travies@ en el mundo virtual de Miku 😜`
+        : `💙 \`${name2}\` está siendo travies@ en el mundo virtual de Sakura 😜`
     
     if (m.isGroup) {
         let pp = 'https://files.catbox.moe/lw9vib.mp4'
@@ -40,4 +40,5 @@ handler.command = ['bleh', 'lengua', 'hacercara', 'carita', 'carcajada']
 handler.group = true
 
 export default handler
+
 
