@@ -4,7 +4,7 @@ let handler = async (m, { conn }) => {
   try {
     await conn.sendMessage(m.chat, { react: { text: '👑', key: m.key } })
 
-    const menuText = `> *@Hola Soy Leo Creador De Itsuki Nakano La Bot Que Estas Usando*\n\n> sᴇʟᴇᴄɪᴏɴᴀ ᴜɴ ᴍᴇᴛᴏᴅᴏ ᴘᴀʀᴀ ᴄᴏᴍᴜɴɪᴄᴀʀᴛᴇ ᴄᴏɴᴍɪɢᴏ 🧃:`
+    const menuText = `> *@Hola Soy La Creador De Itsuki Nakano La Bot Que Estas Usando*\n\n> sᴇʟᴇᴄɪᴏɴᴀ ᴜɴ ᴍᴇᴛᴏᴅᴏ ᴘᴀʀᴀ ᴄᴏᴍᴜɴɪᴄᴀʀᴛᴇ ᴄᴏɴᴍɪɢᴏ 🧃:`
 
     const imageUrl = 'https://cdn.russellxz.click/892b3d23.jpg'
 
@@ -20,7 +20,7 @@ let handler = async (m, { conn }) => {
         name: 'cta_url',
         buttonParamsJson: JSON.stringify({ 
           display_text: '𝙊𝙬𝙣𝙚𝙧 👑', 
-          url: 'https://wa.me/573187418668' 
+          url: 'https://wa.me/59175409126' 
         })
       },
       {
@@ -54,7 +54,7 @@ let handler = async (m, { conn }) => {
   } catch (e) {
     console.error('❌ Error en el comando owner:', e)
     await conn.sendMessage(m.chat, {
-      text: `❌ *Error al cargar la información del creador*\n\n🔗 Contacta directamente: https://wa.me/573187418668\n\n⚠️ *Error:* ${e.message}`
+      text: `❌ *Error al cargar la información del creador*\n\n🔗 Contacta directamente: https://wa.me/59175409126\n\n⚠️ *Error:* ${e.message}`
     }, { quoted: m })
   }
 }
