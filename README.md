@@ -103,7 +103,7 @@ para usuarios del heroku
 
 ## <img src="https://i.pinimg.com/originals/19/80/6e/19806e91932e6054965fc83b85241270.gif" alt="Creator 🧸" width="42" height="42"> Creator 🧸
 
-* <a href="https://wa.me/59175409126"><img alt="Creator 🧸" src="https://img.shields.io/badge/Diego - Creator🧸-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+* <a href="https://wa.me/59175409126"><img alt="Creator 🧸" src="https://img.shields.io/badge/Reyes - Creator🧸-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
 
 
 ## <img src="https://static.wikia.nocookie.net/nyancat/images/d/d3/Nyan-cat.gif/revision/latest/scale-to-width-down/400?cb=20131231222500&path-prefix=es" alt="Grupo" width="45" height="43"> Bot Oficial 📍
@@ -115,6 +115,6 @@ para usuarios del heroku
 
 ### Editor Y Propietario Del Bot 🌹⚡️
 <a
-href="https://github.com/diegojadibot"><img src="https://github.com/diegojadibot.png" width="200" height="200" alt="Diego"/></a>
+href="https://github.com/Rf-reyes-5345"><img src="https://github.com/Rf-reyes-5345.png" width="200" height="200" alt="Diego"/></a>
 
 ## Colaboradores Del Bot ✨️   [![AzamiJs](https://github.com/AzamiJs.png?size=100)](https://github.com/AzamiJs) [![Ender-GB-Isis777](https://github.com/Ender-GB-Isis777.png?size=100)](https://github.com/Ender-GB-Isis777)  [![elrebelde21](https://github.com/elrebelde21.png?size=100)](https://github.com/elrebelde21) [![MoonContentCreator](https://github.com/MoonContentCreator.png?size=100)](https://github.com/MoonContentCreator)
