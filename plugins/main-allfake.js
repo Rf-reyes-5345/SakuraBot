@@ -16,7 +16,7 @@ global.canalNombreM = [
   "꒰ ❄️ ITՏᑌKI ᑎᗩKᗩᑎO-ᐯ3 ᑌᑭᗪᗰTᗴ ☃️ ꒱", 
   "𝆺𝅥 𝆭 ִ ֗ ❄ 𝐋𝐚𝐬 𝐐𝐮𝐢𝐧𝐭𝐢𝐥𝐥𝐢𝐬𝐚𝐬-𝐍𝐨𝐯𝐞𝐝𝐚𝐝 📢 ┆ 𝐂𝐡𝐚𝐧𝐧𝐞𝐥-𝐈𝐧𝐟𝐨 ☃️ ˚₊‧",
   "𝗠𝗘𝗠𝗘𝗦 🧃➜ 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗘𝗗𝗜𝗧 𝗬 𝗠𝗔𝗦 💭",
-  "𝐥𝐞𝐨 » 𝐔𝐩𝐝𝐚𝐭𝐞 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ❄️"
+  "𝚁𝚎𝚢𝚎𝚜 𝚘𝚏𝚌 🌩» 𝐔𝐩𝐝𝐚𝐭𝐞 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ❄️"
 ]
 
 global.channelRD = await getRandomChannel()
@@ -47,14 +47,14 @@ global.iconos = [
 ]
 global.icono = global.iconos[Math.floor(Math.random() * global.iconos.length)]
 
-global.wm = '© 𝐋𝐞𝐨  𝐗𝐬𝐳𝐲'
+global.wm = '𝚁𝚎𝚢𝚎𝚜 𝚘𝚏𝚌 🌩'
 global.wm3 = '⫹⫺ 𝙈𝙪𝙡𝙩𝙞-𝘿𝙚𝙫𝙞𝙘𝙚 💻'
-global.author = '👑 ᗰᗩᗪᗴ ᗷY ᒪᗴO 🧃'
-global.dev = '© 𝙾𝚆𝙽𝙴𝚁-𝙻𝙴𝙾 𝙳𝙴𝚅 👑'
-global.textbot = 'Itsuki-Nakano|IAV3 Leo'
-global.etiqueta = '@Leo Xzsy'
-global.gt = '© 𝐂𝐫𝐞𝐚𝐝𝐨 𝐏𝐨𝐫 𝐋𝐞𝐨𝐃𝐞𝐯 𝐈𝐭𝐬𝐮𝐤𝐢-𝐂𝐡𝐚𝐧 𝐓𝐡𝐞 𝐁𝐞𝐬𝐭 𝐁𝐨𝐭𝐬 𝐎𝐟 𝐖𝐡𝐚𝐭𝐬𝐚𝐩𝐩 🤖👑'
-global.me = '🌨️ 𝙸𝚃𝚂𝚄𝙺𝙸 𝙽𝙰𝙺𝙰𝙽𝙾 𝙼𝙴𝚆 𝚄𝙿𝙳𝙰𝚃𝙴 ☃️'
+global.author = '👑 By Reyes-ofc 🧃'
+global.dev = 'By Reyes-ofc👑'
+global.textbot = 'Sakura : Bot 🌹|By Reyes-ofc'
+global.etiqueta = '𝚁𝚎𝚢𝚎𝚜 𝚘𝚏𝚌 🌩'
+global.gt = 'Creado por By Reyes-ofc |Sakura : Bot 👑'
+global.me = '🌨️ 𝙎𝙖𝙠𝙪𝙧𝙖𝘽𝙤𝙩-𝙈𝘿 NEW UPDATE 🌸 ☃️'
 
 global.fkontak = { 
   key: { 
