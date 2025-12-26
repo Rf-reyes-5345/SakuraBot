@@ -89,7 +89,7 @@ users.forEach((v, index) => {
     const name = v.user.name || 'itsuki-sub'
     const uptime = v.uptime ? dhms(Date.now() - v.uptime) : "0s"
 
-    botList += `🌷 *Itsuki-V3 Sub*  *[ ${index + 1} ]*\n\n`
+    botList += `🌷 *Sakura : Subbots*  *[ ${index + 1} ]*\n\n`
     botList += `🌱 *Tag :* +${jid}\n`
     botList += `🆔️ *ID :* wa.me/${jid}?text=.menu\n`
     botList += `🤖 *Bot :* Itsuki-V3 Sub\n`
