@@ -97,7 +97,7 @@ let handler = async (m, { text, args, usedPrefix, command, conn }) => {
   }
 
   const caption = [
-`╭━━━〔 🌸 *ITSUKI NAKANO - FF UID* 🌸 〕━━━⬣`,
+`╭━━━〔 🌸 *𝙎𝙖𝙠𝙪𝙧𝙖𝘽𝙤𝙩-𝙈𝘿  - FF UID* 🌸 〕━━━⬣`,
 `┃`,
 `┃ 👤 Usuario: ${f.name || 'Desconocido'}`,
 `┃ 🆔 UID: ${f.uid || uid}`,
@@ -109,7 +109,7 @@ extraLines.length ? `┃ ✦ Datos extra:` : '',
 `┃`,
 `╰━━━━━━━━━━━━━━⬣`,
 `⌚ Fecha: ${fechaLocal}`,
-`🔥 「 Itsuki Nakano-FF 」 🔥`
+`🔥 「 Sakura Bot-FF 」 🔥`
   ].filter(Boolean).join('\n')
 
   try {
