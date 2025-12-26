@@ -67,7 +67,7 @@ npm start
 ```bash
 ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 > cd 
-> cd Session
+> cd SakuraBot
 > npm start
 ```
 
