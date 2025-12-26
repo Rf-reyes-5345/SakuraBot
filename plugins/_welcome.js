@@ -35,7 +35,7 @@ handler.before = async function (m, { conn }) {
         welcomeText += `👋 Hola, @${mentionId}!\n`;
         welcomeText += `🎉 Ahora somos *${finalCount}* miembros.\n`; 
         welcomeText += `📜 Por favor, lee la descripción y respeta las normas.\n\n`;
-        welcomeText += `*¡Disfruta tu estancia!* 🥳`;
+        welcomeText += `*¡Disfruta tu estancia querid@!* 🥳`;
 
         await conn.sendMessage(m.chat, {
             image: { url: welcomeImageUrl },
