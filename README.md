@@ -1,83 +1,52 @@
-# `❄️ Itsuki Nakano - IA V3 ✨️`
 
-<div align="center">
-
-<p align="center"> 
-<a href="https://github.com/leoxito"><img src="https://readme-typing-svg.herokuapp.com?font=Boldonse&size=15&duration=3000&pause=1000&color=FF69B4&center=true&width=435&lines=Bienvenido+al+repositorio+actualizado;🌸+Itsuki+Nakano+IA+V3;✨+La+evolución+definitiva;🎀+Bot+multifuncional+avanzado!" height="90px"></a>
+### Sakura : Bot - Lite - MD 🌸
+<p align="center">
+<img src="https://telegra.ph/file/9379ac50c5285dc976e2e.png" alt="Bot-WhatsApp" width="900"/>
 </p>
 
-<!-- Banner Animado -->
-<img src="https://cdn.russellxz.click/b9042836.jpg" width="700" alt="Itsuki-NakanoV3"/>
+### <img src="https://i.pinimg.com/originals/19/80/6e/19806e91932e6054965fc83b85241270.gif" alt="Prueba El Bot Aqui" width="42" height="42"> Prueba El Bot Aqui
 
-<br>
+> Si Deseas Probar El Bot Antes De Instalarlo, Click Abajo.🟢
 
-[![Version](https://img.shields.io/badge/Version-7.5.2-FF69B4.svg?style=for-the-badge&logo=star)]()
-[![Baileys](https://img.shields.io/badge/Baileys-Multi--Device-00BFFF.svg?style=for-the-badge&logo=whatsapp)]()
-[![Plugins](https://img.shields.io/badge/Plugins-1000+-00FF7F.svg?style=for-the-badge&logo=rocket)]()
-[![Speed](https://img.shields.io/badge/Speed-⚡Ultra_Fast-FFD700.svg?style=for-the-badge&logo=flash)]()
-[![Node.js](https://img.shields.io/badge/Node.js-21+-32CD32.svg?style=for-the-badge&logo=node.js)]()
-
-</div>
+<a href="https://chat.whatsapp.com/Eaa9JFA53ps7WHMv2VHbO9"><img alt="📍 Grupo Oficial" src="https://img.shields.io/badge/Grupo-Oficial-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
 
 
-</div>
+- ### 🌤Configuracion🧩
+ Clonar Repo : SakuraBot [Aqui.](https://github.com/diegojadibot/SakuraBotLite-MD/fork)
 
-<details>
-<summary><b>✐ ᑎOᐯᗴᗪᗩᗪᗴՏ ᗪᗴᒪ ᗷOT 🗞️</b></summary>
-
-# 🍒 **ItsukiBot - Versión V3**  
-## *¡Asombroso con nuevas opciones!*  
-
-# ` 🚀 𝙉𝙤𝙫𝙚𝙙𝙖𝙙𝙚𝙨 𝙋𝙧𝙞𝙣𝙘𝙞𝙥𝙖𝙡𝙚𝙨`
+   
   
-### 🌟 **𝙎𝙞𝙨𝙩𝙚𝙢𝙖 𝙙𝙚 𝙀𝙘𝙤𝙣𝙤𝙢𝙞𝙖 𝙈𝙚𝙟𝙤𝙧𝙖𝙙𝙤**    
-- 🎮 **𝙈𝙖𝙨 𝙟𝙪𝙚𝙜𝙤𝙨 𝙮 𝙖𝙘𝙩𝙞𝙫𝙞𝙙𝙖𝙙𝙚𝙨**: 𝙉𝙪𝙚𝙫𝙖𝙨 𝙛𝙤𝙧𝙢𝙖𝙨 𝙙𝙚 𝙜𝙖𝙣𝙖𝙧 𝙢𝙤𝙣𝙚𝙙𝙖𝙨.  
-- 💰 **𝙎𝙞𝙨𝙩𝙚𝙢𝙖 𝙙𝙚 𝙧𝙚𝙘𝙤𝙢𝙥𝙚𝙣𝙨𝙖𝙨 𝙢𝙚𝙟𝙤𝙧𝙖𝙙𝙤**. 
-- 🚫 𝙎𝙪𝙥𝙚𝙧 𝙎𝙞𝙨𝙩𝙚𝙢𝙖 𝘿𝙚 𝘼𝙣𝙩𝙞-𝘼𝙧𝙖𝙗𝙚 𝙀𝙭𝙥𝙪𝙡𝙨𝙞𝙤𝙣 𝙙𝙚 𝙐𝙣𝙖 𝘿𝙚𝙛𝙚𝙣𝙨𝙖 𝙋𝙖𝙧𝙖 𝙂𝙧𝙪𝙥𝙤𝙨 
+- ### 🧸Instalar Por Render🧩
 
- # ` ⚙️ 𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙉𝙪𝙚𝙫𝙤𝙨`
-  
-### 🔧 **𝘾𝙤𝙣𝙛𝙞𝙜𝙪𝙧𝙖𝙘𝙞ó𝙣 𝘼𝙫𝙖𝙣𝙯𝙖𝙙𝙖**  
-- `𝙨𝙚𝙩𝙥𝙧𝙚𝙛𝙞𝙭 <𝙥𝙧𝙚𝙛𝙞𝙟𝙤>`: 𝙀𝙨𝙩𝙖𝙗𝙡𝙚𝙘𝙚 𝙪𝙣 𝙥𝙧𝙚𝙛𝙞𝙟𝙤 𝙥𝙚𝙧𝙨𝙤𝙣𝙖𝙡𝙞𝙯𝙖𝙙𝙤.  
-- `𝙤𝙣𝙡𝙮𝙖𝙙𝙢𝙞𝙣 𝙤𝙣/𝙤𝙛𝙛`: 𝙍𝙚𝙨𝙩𝙧𝙞𝙣𝙜𝙚 𝙘𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙨𝙤𝙡𝙤 𝙖 𝙖𝙙𝙢𝙞𝙣𝙨.  
-- `𝙧𝙤𝙤𝙩𝙤𝙬𝙣𝙚𝙧 <𝙖𝙘𝙘𝙞𝙤𝙣>`: 𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙚𝙭𝙘𝙡𝙪𝙨𝙞𝙫𝙤𝙨 𝙙𝙚𝙡 𝙥𝙧𝙤𝙥𝙞𝙚𝙩𝙖𝙧𝙞𝙤.  
-- 𝙉𝙪𝙚𝙫𝙤𝙨 𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙘𝙤𝙢𝙤 𝙪𝙡𝙩𝙧𝙖 𝙝𝙙 𝙥𝙖𝙧𝙖 𝙢𝙚𝙟𝙤𝙧𝙖𝙧 𝙡𝙖 𝙘𝙖𝙡𝙞𝙙𝙖𝙙 𝙖𝙡𝙩𝙖.  
-- 𝙉𝙪𝙚𝙫𝙤𝙨 𝙋𝙡𝙖𝙮𝙨 𝘿𝙚 𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖: 14 𝙥𝙡𝙖𝙮𝙨 𝙘𝙤𝙣 𝙖𝙡𝙩𝙖 𝙘𝙖𝙡𝙞𝙙𝙖𝙙 𝙩𝙤𝙙𝙤𝙨 𝙛𝙪𝙣𝙘𝙞𝙤𝙣𝙖𝙡𝙚𝙨.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/blueprint/new?repo=https%3A%2F%2Fgithub.com%2diegojadibot%2FSakuraBotLite-MD) 
 
-# ` 📱 𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙘𝙞ó𝙣 𝙮 𝙐𝙩𝙞𝙡𝙞𝙙𝙖𝙙𝙚𝙨`
+- ### 📍Instalar Por Code Space🧸
+
+[`CREAR SERVIDOR`](https://github.com/codespaces/new?skip_quickstart=true&machine=basicLinux32gb&repo=738341999&ref=main&geo=UsEast)
+***
+
+- #### 📍Instalacion Por Termux Automatica🧸
+
+[![blog](https://img.shields.io/badge/Instalacion-Automatica-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+](https://youtu.be/X-wQbVhLb8w?si=UdP9uM5SPFRY75nU)
+
+[`🧩 Instalar Termux Clic Aqui`](https://www.mediafire.com/file/3hsvi3xkpq3a64o/termux_118.apk/file)
  
-- `𝙜𝙚𝙩𝙣𝙪𝙢`: 𝙊𝙗𝙩𝙞𝙚𝙣𝙚 𝙣𝙪𝙢𝙚𝙧𝙤 𝙙𝙚 𝙒𝙝𝙖𝙩𝙨𝘼𝙥𝙥 𝙘𝙤𝙣 𝙥𝙚𝙧𝙢𝙞𝙨𝙤𝙨.  
-- `𝙝𝙙`: 𝙢𝙚𝙟𝙤𝙧𝙖 𝙩𝙪 𝙞𝙢𝙖𝙜𝙚𝙣 𝙘𝙤𝙣 𝙪𝙣 𝙪𝙡𝙩𝙧𝙖-𝙃𝘿.  
-- `𝙥𝙞𝙣𝙜`: 𝙀𝙨𝙩𝙖𝙙𝙞𝙨𝙩𝙞𝙘𝙖𝙨 𝙙𝙚𝙡 𝙗𝙤𝙩. 
+```bash
+termux-setup-storage
+```
 
- # ` 👤 𝙊𝙣𝙡𝙮𝘼𝙙𝙢𝙞𝙣 𝙈𝙤𝙙𝙚`
- 
-- 𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙘𝙧𝙞𝙩𝙞𝙘𝙤𝙨 𝙧𝙚𝙨𝙩𝙧𝙞𝙣𝙜𝙞𝙙𝙤𝙨 𝙖 𝙖𝙙𝙢𝙞𝙣𝙞𝙨𝙩𝙧𝙖𝙙𝙤𝙧𝙚𝙨.  
-- 𝙋𝙖𝙣𝙚𝙡 𝙙𝙚 𝙘𝙤𝙣𝙩𝙧𝙤𝙡 𝙚𝙣 𝙩𝙞𝙚𝙢𝙥𝙤 𝙧𝙚𝙖𝙡.  
+```bash
+apt update -y && yes | apt upgrade && pkg install -y bash wget mpv && wget -O - https://raw.githubusercontent.com/diegojadibot/SakuraBotLite-MD/master/sakura.sh | bash
+```
 
- # ` 👑 𝙍𝙤𝙤𝙩𝙊𝙬𝙣𝙚𝙧 𝙎𝙮𝙨𝙩𝙚𝙢`
-  
-- 𝘼𝙘𝙘𝙚𝙨𝙤 𝙩𝙤𝙩𝙖𝙡 𝙖 𝙘𝙤𝙣𝙛𝙞𝙜𝙪𝙧𝙖𝙘𝙞𝙤𝙣𝙚𝙨 𝙜𝙡𝙤𝙗𝙖𝙡𝙚𝙨.  
-- 𝘿𝙚𝙘𝙞𝙨𝙞𝙤𝙣𝙚𝙨 𝙖𝙪𝙩𝙤𝙢𝙖𝙩𝙞𝙯𝙖𝙙𝙖𝙨 𝙨𝙚𝙜𝙪𝙣 𝙧𝙚𝙜𝙡𝙖𝙨.  
+- #### 📍Instalacion Por Termux Manual👨‍💻
 
-# ` ⚡ 𝙍𝙚𝙣𝙙𝙞𝙢𝙞𝙚𝙣𝙩𝙤 𝙮 𝙊𝙥𝙩𝙞𝙢𝙞𝙯𝙖𝙘𝙞𝙤𝙣`
- 
-- ✅ **𝘾𝙤𝙙𝙞𝙜𝙤 𝙤𝙥𝙩𝙞𝙢𝙞𝙯𝙖𝙙𝙤** 𝙥𝙖𝙧𝙖 𝙢𝙖𝙮𝙤𝙧 𝙫𝙚𝙡𝙤𝙘𝙞𝙙𝙖𝙙.  
-- ✅ **𝙂𝙚𝙨𝙩𝙞𝙤𝙣 𝙙𝙚 𝙢𝙚𝙢𝙤𝙧𝙞𝙖 𝙢𝙚𝙟𝙤𝙧𝙖𝙙𝙖**.  
-- ✅ **𝙎𝙞𝙨𝙩𝙚𝙢𝙖 𝙢𝙪𝙡𝙩𝙞-𝙥𝙧𝙚𝙛𝙞𝙟𝙤 𝙚𝙛𝙞𝙘𝙞𝙚𝙣𝙩𝙚**.  
-- ✅ **𝙍𝙚𝙨𝙥𝙪𝙚𝙨𝙩𝙖 𝙧𝙖𝙥𝙞𝙙𝙖** 𝙚𝙣 𝙜𝙧𝙪𝙥𝙤𝙨 𝙜𝙧𝙖𝙣𝙙𝙚𝙨.
-</details>
+[![blog](https://img.shields.io/badge/Instalacion-Manual-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
+](https://youtu.be/9-v4XwMTJYE?si=STdO2GwZR1GAmXfA)
 
-<details>
-<summary><b>✐ IᑎՏTᗩᒪᗩᑕIOᑎ ᗪᗴᒪ ᗷOT 🤖</b></summary>
+> ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 
-### **`𝗧𝗼𝗰𝗮 𝗟𝗮 𝗜𝗺𝗮𝗴𝗲𝗻 𝗣𝗮𝗿𝗮 𝗗𝗲𝘀𝗰𝗮𝗿𝗴𝗮𝗿 𝗧𝗲𝗿𝗺𝘂𝘅 𝗔𝗰𝘁𝘂𝗮𝗹𝗶𝘇𝗮𝗱𝗼⚙️`**
-<a
-href="https://www.mediafire.com/file/wkinzgpb0tdx5qh/com.termux_1022.apk/file"><img src="https://qu.ax/uYEOh.jpg" height="125px"></a> 
-
-### **`🌸 Instalación por termux`**
-
-> *Comandos para instalar de forma manual*
 ```bash
 termux-setup-storage
 ```
@@ -85,36 +54,67 @@ termux-setup-storage
 apt update && apt upgrade && pkg install -y git nodejs ffmpeg imagemagick yarn
 ```
 ```bash
-git clone https://github.com/leoxito/Itsuki-NakanoV3 && cd Itsuki-NakanoV3
+git clone https://github.com/diegojadibot/SakuraBotLite-MD && cd SakuraBotLite-MD
 ```
 ```bash
-npm install
+yarn install && npm install
 ```
 ```bash
 npm start
 ```
-</details>
 
-<details>
-<summary><b>✐ ᗴᑎᒪᗩᗰᑕᗴՏ OᖴIᑕIᗩᒪᗴՏ ᗪᗴᒪ ᗷOT 🖇️</b></summary>
+- #### 📍Activar En Caso De Detenerse En Termux🧸
+```bash
+ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
+> cd 
+> cd SakuraBotLite-MD
+> npm start
+```
 
- * 𝐂𝐚𝐧𝐚𝐥 𝐎𝐟𝐢𝐜𝐢𝐚𝐥  [`¡Click aquí!`](https://whatsapp.com/channel/0029VbBBXTr5fM5flFaxsO06)
-* 𝐆𝐫𝐮𝐩𝐨 𝐎𝐟𝐢𝐜𝐢𝐚𝐥 [`¡Click aquí!`](https://chat.whatsapp.com/Dr1grCIHKb2HFvoLdl3q1i)
-* 𝐂𝐨𝐦𝐮𝐧𝐢𝐝𝐚𝐝 𝐎𝐟𝐢𝐜𝐢𝐚𝐥 [`¡Click aquí!`](https://chat.whatsapp.com/DWnpVoJgxe25H9nXNCcfCn)
-</details>
+- ### 📍Obtener Otro Codigo Qr👨‍💻 
+```bash
+> ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
+> cd SakuraBotLite-MD
+> rm -rf SakuraBotSession
+> npm start
+```
+- ### 📍Actualizar SakuraBot 🟢
+> Note Comandos para actualizar SakuraBotLite-MD de forma automática
+```bash
+grep -q 'bash\|wget' <(dpkg -l) || apt install -y bash wget && wget -O - https://raw.githubusercontent.com/diegojadibot/SakuraBotLite-MD/master/update.sh | bash
+```
+Para que no pierda su progreso en SakuraBot, estos comandos realizarán un respaldo de su `database.json` y se agregará a la versión más reciente.
 
-### **`✦ 𝗦𝗸𝘆𝗨𝗹𝘁𝗿𝗮𝗣𝗹𝘂𝘀 ✦`**
+> Warning Estos comandos solo funcionan para TERMUX, REPLIT, LINUX
 
+- ### 📍 Activar En Heroku 🚀
+para usuarios del heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/diegojadibot/SakuraBotLite-MD)
+
+#### Heroku Buildpack
+| BuildPack | LINK |
+|--------|--------|
+| **FFMPEG** |[click](https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest) |
+| **IMAGEMAGICK** | [click](https://github.com/DuckyTeam/heroku-buildpack-imagemagick) |
+
+***
+
+
+## <img src="https://i.pinimg.com/originals/19/80/6e/19806e91932e6054965fc83b85241270.gif" alt="Creator 🧸" width="42" height="42"> Creator 🧸
+
+* <a href="https://wa.me/573012482597"><img alt="Creator 🧸" src="https://img.shields.io/badge/Diego - Creator🧸-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+
+
+## <img src="https://static.wikia.nocookie.net/nyancat/images/d/d3/Nyan-cat.gif/revision/latest/scale-to-width-down/400?cb=20131231222500&path-prefix=es" alt="Grupo" width="45" height="43"> Bot Oficial 📍
+
+* <a href="https://wa.me/51939041500?text=!menu"><img alt="Bot Oficial 📍" src="https://img.shields.io/badge/Bot - Oficial📍-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+
+> No Spam Al Bot!
+---------
+
+### Editor Y Propietario Del Bot 🌹⚡️
 <a
-href="https://dash.skyultraplus.com"><img src="https://cdn.russellxz.click/39cd2caf.jpg" height="125px"></a>
+href="https://github.com/diegojadibot"><img src="https://github.com/diegojadibot.png" width="200" height="200" alt="Diego"/></a>
 
-<details>
-<summary><b>IᑎIᑕIᗩ ᗩ ITՏᑌKY ᗴᑎ ՏKY-ᑌᒪTᖇᗩ ᑭᒪᑌՏ 🌟</b></summary>
-
-* 𝘿𝙖𝙨𝙝𝙗𝙤𝙖𝙧𝙙 💻 : [`Dash`](https://dash.skyultraplus.com)
-</details>
-
-
-### **`Autor del bot`**
-<a
-href="https://github.com/leoxito"><img src="https://github.com/leoxito.png" width="150" height="150" alt="leoxito"/></a>
+## Colaboradores Del Bot ✨️   [![AzamiJs](https://github.com/AzamiJs.png?size=100)](https://github.com/AzamiJs) [![Ender-GB-Isis777](https://github.com/Ender-GB-Isis777.png?size=100)](https://github.com/Ender-GB-Isis777)  [![elrebelde21](https://github.com/elrebelde21.png?size=100)](https://github.com/elrebelde21) [![MoonContentCreator](https://github.com/MoonContentCreator.png?size=100)](https://github.com/MoonContentCreator)
